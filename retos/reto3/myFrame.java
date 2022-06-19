@@ -89,15 +89,15 @@ public class myFrame extends JFrame implements ActionListener {
         System.out.println(ciudades.get(indexOfLargest));
         for (int i = 0; i < pacientes.size(); i++) {
 
-            result_area.append("El paciente: " + ((Paciente) pacientes.get(i)).getCc() +
-                    " Pertenece a la categoría: " + ((Paciente) pacientes.get(i)).clasificarEdad());
+            result_area.append(((Paciente) pacientes.get(i)).getCc() +
+                    " - " + ((Paciente) pacientes.get(i)).clasificarEdad());
             result_area.append("\n");
 
         }
 
         // System.out.println(ciudades.get(indexOfLargest));
 
-        result_area.append("La ciudad con mayor número de casos es: " + ciudades.get(indexOfLargest));
+        result_area.append(ciudades.get(indexOfLargest));
         result_area.append("\n");
         result_area.append("\n");
 

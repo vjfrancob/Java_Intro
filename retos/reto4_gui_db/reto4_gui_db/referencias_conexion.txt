@@ -1,0 +1,39 @@
+[8:39 PM] Luis Eduardo Vega Rodriguez
+package models;import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;/**
+*
+* @author Eduardo Vega
+*/
+public class ConnectionManager { private static Connection con; public static Connection getConnection() {
+try {
+con = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.dir") + "/demo.db");
+if(con!=null){
+System.out.println("Conexion exitosa");
+}
+} catch (SQLException ex) {
+// log an exception. fro example:
+System.out.println("Error de conexion.");
+}
+return con;
+}
+}
+
+[8:49 PM] Luis Eduardo Vega Rodriguez
+ConnectionManager conexion = new ConnectionManager();
+con = conexion.getConnection();
+Statement stm = con.createStatement();
+//consulta
+String sql = "SELECT * FROM users where username='" + user + "' and password='" + password + "'";
+System.out.println(sql);
+ResultSet result = stm.executeQuery("SELECT * FROM users where username='" + user + "' and password='" + password + "'"); //RECORREMOS EL RESULTADO PARA VISUALIZAR CADA FILA
+while (result.next()) {
+return true;
+}
+result.close(); // Cerrar ResultSet
+stm.close(); // Cerrar Statement
+con.close(); // Cerrar conexion
+
+[8:53 PM] Luis Eduardo Vega Rodriguez
+private Connection con = null;
+
