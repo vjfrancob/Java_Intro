@@ -65,7 +65,8 @@ public class myFrame extends JFrame implements ActionListener {
 
     private JPanel ingreso_master;
 
-    JTable result_table;
+    JTable ip_table;
+    JTable im_table;
 
     JTextArea result_area;
 
@@ -122,43 +123,6 @@ public class myFrame extends JFrame implements ActionListener {
         }
         return true;
     }
-
-    // void resultadosEstudios() {
-    // result_area.setText("");
-    //
-    // int conteo[] = new int[pacientes.size()];
-    //
-    // int indexOfLargest = 0;
-    //
-    // for (int i = 0; i < pacientes.size(); i++) {
-    //
-    // for (int j = 0; j < pacientes.size(); j++) {
-    //
-    // if (pacientes.get(i).getCiudad().equals((pacientes.get(j)).getCiudad())) {
-    //
-    // conteo[i]++;
-    //
-    // }
-    //
-    // if (conteo[i] > conteo[indexOfLargest]) {
-    // indexOfLargest = i;
-    // }
-    // }
-    // }
-    //
-    // for (int i = 0; i < pacientes.size(); i++) {
-    //
-    // result_area.append((pacientes.get(i)).getCc() +
-    // " - " + (pacientes.get(i)).clasificarEdad());
-    // result_area.append("\n");
-    //
-    // }
-    //
-    // result_area.append(pacientes.get(indexOfLargest).getCiudad());
-    // result_area.append("\n");
-    // result_area.append("\n");
-    //
-    // }
 
     public myFrame() {
 
@@ -327,6 +291,61 @@ public class myFrame extends JFrame implements ActionListener {
         pestañas.addTab("Ingreso de Información", null, ingreso_master);
 
         /*
+         * VENTANA DE VISUALIZACION DE INGRESOS
+         */
+
+        JPanel validacion_master = new JPanel(new GridLayout(1, 2, 5, 5));
+        validacion_master.setOpaque(false);
+
+        JPanel vm_pacientes = new JPanel(new GridLayout(1, 1));
+        vm_pacientes.setOpaque(false);
+
+        vm_pacientes.setBorder(BorderFactory
+                .createTitledBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)), "Pacientes Ingresados"));
+
+        JPanel vm_medicos = new JPanel(new GridLayout(1, 1));
+        vm_medicos.setOpaque(false);
+
+        vm_medicos.setBorder(BorderFactory
+                .createTitledBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)), "Medicos Ingresados"));
+
+        ip_table = new JTable();
+        String ip_columNames[] = { "Nombre", "Documento", "Edad", "Ciudad", "Eps", "Enfermedad" };
+        DefaultTableModel ip_tableMOdel = new DefaultTableModel(ip_columNames, 0);
+        ip_table.setModel(ip_tableMOdel);
+
+        ip_table.setOpaque(false);
+        ip_table.setBackground(new Color(61, 114, 148, 58));
+        ip_table.getTableHeader().setBackground(new Color(58, 161, 145, 63));
+
+        ip_table.getTableHeader().setFont(new Font("Montserrat", Font.BOLD, 12));
+        ip_table.setSelectionBackground(new Color(210, 95, 58, 82));
+
+        im_table = new JTable();
+        String im_columNames[] = { "Nombre", "Documento", "Edad", "Ciudad", "Especialidad" };
+        DefaultTableModel im_tableMOdel = new DefaultTableModel(im_columNames, 0);
+        im_table.setModel(im_tableMOdel);
+
+        im_table.setOpaque(false);
+        im_table.setBackground(new Color(61, 114, 148, 58));
+        im_table.getTableHeader().setBackground(new Color(58, 161, 145, 63));
+
+        im_table.getTableHeader().setFont(new Font("Montserrat", Font.BOLD, 12));
+        im_table.setSelectionBackground(new Color(210, 95, 58, 82));
+
+        vm_pacientes.add(new JScrollPane(ip_table,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        vm_medicos.add(new JScrollPane(im_table,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        validacion_master.add(vm_pacientes);
+        validacion_master.add(vm_medicos);
+
+        pestañas.addTab("Información Ingresada", null, validacion_master);
+
+        /*
          * INCLUIR PESTAÑAS AL FRAME
          */
 
@@ -362,6 +381,9 @@ public class myFrame extends JFrame implements ActionListener {
                 String data[] = { nombre_paciente.getText(), docIdnt_paciente.getText(), edad_paciente.getText(),
                         ciudad_paciente.getText(), eps_paciente.getText(), enfermedad_paciente.getText() };
 
+                DefaultTableModel ip_tableMOdel = (DefaultTableModel) ip_table.getModel();
+                ip_tableMOdel.addRow(data);
+
                 input_clean();
             }
         }
@@ -390,7 +412,10 @@ public class myFrame extends JFrame implements ActionListener {
             } else {
 
                 String data[] = { nombre_medico.getText(), docIdnt_medico.getText(), edad_medico.getText(),
-                        ciudad_medico.getText(), especialidad_medico.getText()};
+                        ciudad_medico.getText(), especialidad_medico.getText() };
+
+                DefaultTableModel im_tableMOdel = (DefaultTableModel) im_table.getModel();
+                im_tableMOdel.addRow(data);
 
                 input_clean();
             }
