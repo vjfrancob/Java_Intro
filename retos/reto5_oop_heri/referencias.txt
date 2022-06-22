@@ -1,0 +1,212 @@
+
+
+
+
+
+
+        // ingreso = new JPanel(new GridLayout(7, 2, 5, 5));
+        // ingreso.setOpaque(false);
+
+
+
+
+        /*
+         * panel 2
+         */
+
+        JPanel panel2_data = new JPanel(new BorderLayout(5, 5));
+        panel2_data.setOpaque(false);
+
+        JPanel panel2_button = new JPanel(new BorderLayout());
+        panel2_button.setOpaque(false);
+
+        JPanel validacion = new JPanel(new GridLayout(1, 2, 5, 5));
+        validacion.setOpaque(false);
+
+        JPanel botones_2 = new JPanel(new GridLayout(2, 1, 5, 5));
+        botones_2.setOpaque(false);
+
+        /*
+         * panel 3
+         */
+
+        JPanel panel3_master = new JPanel(new BorderLayout(10, 10));
+        panel3_master.setOpaque(false);
+
+        JPanel panel3_search = new JPanel(new GridLayout(1, 3, 10, 10));
+        panel3_search.setOpaque(false);
+
+        JPanel panel3_input = new JPanel(new GridLayout(7, 2, 10, 10));
+        panel3_input.setOpaque(false);
+
+        JLabel lbl_idnt = new JLabel("Documento del paciente:", SwingConstants.CENTER);
+
+        documento = new JTextField();
+
+        /*
+         * JTABLE FOR VALIDATION OF DATA ENTRY
+         */
+        result_table = new JTable();
+
+        String columNames[] = { "Nombre", "Documento", "Edad", "Ciudad", "Eps", "Enfermedad" };
+        DefaultTableModel tableModel = new DefaultTableModel(columNames, 0);
+
+        result_table.setModel(tableModel);
+
+        result_table.setOpaque(false);
+        result_table.setBackground(new Color(61, 114, 148, 58));
+
+        result_table.getTableHeader().setFont(new Font("Montserrat", Font.BOLD, 12));
+        result_table.getTableHeader().setOpaque(false);
+        result_table.getTableHeader().setBackground(new Color(58, 161, 145, 63));
+        result_table.setSelectionBackground(new Color(210, 95, 58, 82));
+
+        /*
+         * RESULT AREA
+         */
+
+        result_area = new JTextArea();
+
+        JScrollPane result_scroll = new JScrollPane(result_area,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        /**
+         * VALIDACION - PANEL
+         */
+
+        validacion.add(new JScrollPane(result_table,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        validacion.add(new JScrollPane(result_scroll,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+        botones_2.add(obtButton);
+        botones_2.add(proButton);
+
+        panel2_data.add(validacion, BorderLayout.CENTER);
+        panel2_data.add(botones_2, BorderLayout.WEST);
+
+        /*
+         * GESTION PANEL
+         */
+
+        panel3_search.add(lbl_idnt);
+        panel3_search.add(documento);
+        panel3_search.add(busButton);
+
+        panel3_input.add(lbl_nombre_2);
+        panel3_input.add(nombre_2);
+        panel3_input.add(lbl_cc_2);
+        panel3_input.add(docIdnt_2);
+        panel3_input.add(lbl_edad_2);
+        panel3_input.add(edad_2);
+        panel3_input.add(lbl_ciudad_2);
+        panel3_input.add(ciudad_2);
+        panel3_input.add(lbl_eps_2);
+        panel3_input.add(eps_2);
+        panel3_input.add(lbl_enfermedad_2);
+        panel3_input.add(enfermedad_2);
+        panel3_input.add(editButton);
+        panel3_input.add(delButton);
+
+        panel3_master.add(panel3_search, BorderLayout.NORTH);
+        panel3_master.add(panel3_input, BorderLayout.CENTER);
+
+        /*
+         * TABS CREATION
+         */
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        /*
+         * ingreso
+         */
+        tabbedPane.addTab("Ingreso de información", null, ingreso);
+
+        /*
+         * validacion - procesado
+         */
+
+        tabbedPane.addTab("Procesamiento de datos", null, panel2_data);
+
+        /*
+         * gestion - eliminacion
+         */
+
+        tabbedPane.addTab("Gestion de datos", null, panel3_master);
+
+        /*
+         * INGRESO - PANEL
+         */
+
+        ingreso.add(lbl_nombre);
+        ingreso.add(nombre);
+        ingreso.add(lbl_cc);
+        ingreso.add(docIdnt);
+        ingreso.add(lbl_edad);
+        ingreso.add(edad);
+        ingreso.add(lbl_ciudad);
+        ingreso.add(ciudad);
+        ingreso.add(lbl_eps);
+        ingreso.add(eps);
+        ingreso.add(lbl_enfermedad);
+        ingreso.add(enfermedad);
+        ingreso.add(inButton);
+        ingreso.add(cleanButton);
+
+        /*
+         * ADD PANELS TO FRAME
+         */
+
+        add(tabbedPane);
+
+        /*
+         * WRAP UP FRAME
+         */
+
+
+          if (nombre.getText().equals("") || docIdnt.getText().equals("") || edad.getText().equals("") ||
+                    ciudad.getText().equals("") || eps.getText().equals("") || enfermedad.getText().equals("")) {
+                JOptionPane.showMessageDialog(ingreso,
+                        "Por favor diligencie todos los campos",
+                        "Información erronea",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+            else if (isNumeric(edad.getText()) == false) {
+                JOptionPane.showMessageDialog(ingreso,
+                        "Ingrese una edad valida",
+                        "Información erronea",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+            else {
+
+                /**
+                 * Read input data
+                 */
+
+                String data[] = { nombre.getText(), docIdnt.getText(), edad.getText(),
+                        ciudad.getText(), eps.getText(),
+                        enfermedad.getText() };
+
+                /*
+                 * Print data to JTable
+                 */
+
+                DefaultTableModel tableModel = (DefaultTableModel) result_table.getModel();
+                tableModel.addRow(data);
+
+                /*
+                 * Create cities string
+                 */
+
+                // ciudades.add(ciudad.getText());
+
+                input_clean();
+
+            }
+        }
