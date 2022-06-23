@@ -1,9 +1,6 @@
 package guiFrame;
 
-import java.awt.Dimension;
-
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,7 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
@@ -590,9 +586,6 @@ public class myFrame extends JFrame implements ActionListener {
                 asignacionPacientes = nuevoMedico.pacientes(pacientes, (String) asig_medico.getSelectedItem());
 
                 calculoPacientes(asignacionPacientes);
-
-
-
 
             }
 

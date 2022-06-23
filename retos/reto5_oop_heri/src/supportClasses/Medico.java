@@ -6,8 +6,6 @@ public class Medico extends Persona {
 
     private String especialidad;
 
-    private ArrayList<Object> newPaciente = new ArrayList<Object>();
-
     public Medico() {
 
     }
@@ -17,8 +15,6 @@ public class Medico extends Persona {
         super(nombre, cc, edad, ciudad);
 
         this.especialidad = especialidad;
-
-        this.newPaciente = new ArrayList<Object>();
 
     }
 
