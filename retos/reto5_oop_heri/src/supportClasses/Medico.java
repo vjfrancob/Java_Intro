@@ -8,6 +8,9 @@ public class Medico extends Persona {
 
     private ArrayList<Object> newPaciente = new ArrayList<Object>();
 
+    public Medico() {
+
+    }
 
     public Medico(String nombre, String cc, int edad, String ciudad, String especialidad) {
 
@@ -23,27 +26,18 @@ public class Medico extends Persona {
         return especialidad;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
+    public ArrayList<String> pacientes(ArrayList<Paciente> pacientes, String ccMedico) {
 
-    public ArrayList<Object> pacientes() {
+        ArrayList<String> pacientesAsignados = new ArrayList<>();
 
-        return newPaciente;
-    }
+        for (int i = 0; i < pacientes.size(); i++) {
 
-    /**
-     * ! POR DEFINIR INFORMACIÓN QUE CARGA DEL PACIENTE
-     */
+            if (pacientes.get(i).getccMedico().equals(ccMedico)) {
 
-    public ArrayList<Object> setPacientes(Paciente paciente) {
-
-        this.newPaciente.add(paciente.getNombre());
-        this.newPaciente.add(paciente.getCc());
-        this.newPaciente.add(paciente.getEdad());
-        this.newPaciente.add(paciente.getEnfermedad());
-
-        return newPaciente;
+                pacientesAsignados.add(pacientes.get(i).getCc());
+            }
+        }
+        return pacientesAsignados;
     }
 
 }

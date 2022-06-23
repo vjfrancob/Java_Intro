@@ -1,13 +1,14 @@
 
 package supportClasses;
 
-import java.util.ArrayList;
-
 public class Paciente extends Persona {
 
     private String eps;
     private String enfermedad;
-    private String medico;
+    private String cc_medico;
+
+    public Paciente(){       
+    }
 
     public Paciente(String nombre, String cc, int edad, String ciudad, String eps, String enfermedad) {
 
@@ -29,12 +30,12 @@ public class Paciente extends Persona {
         return enfermedad;
     }
 
-    public String getMedico() {
-        return medico;
+    public String getccMedico() {
+        return cc_medico;
     }
 
-    public void setMedico(String medico) {
-        this.medico = medico;
+    public void setccMedico(String cc_medico) {
+        this.cc_medico = cc_medico;
     }
 
     public void setEnfermedad(String enfermedad) {
@@ -45,19 +46,19 @@ public class Paciente extends Persona {
 
         if (this.getEdad() >= 21 && this.getEdad() <= 30) {
 
-            return "Joven adulto";
+            return this.getCc() + " - " + "Joven adulto";
 
         }
 
         else if (this.getEdad() > 30 && this.getEdad() <= 60) {
 
-            return "Adulto";
+            return this.getCc() + " - " + "Adulto";
 
         }
 
         else if (this.getEdad() > 60) {
 
-            return "Tercera edad";
+            return this.getCc() + " - " + "Tercera edad";
 
         }
 
@@ -66,20 +67,6 @@ public class Paciente extends Persona {
             return "";
 
         }
-
-    }
-
-    public ArrayList<Object> totxt() {
-        ArrayList<Object> outPaciente = new ArrayList<Object>();
-        outPaciente.clear();
-        outPaciente.add(this.getNombre());
-        outPaciente.add(this.getCc());
-        outPaciente.add(this.getEdad());
-        outPaciente.add(this.getCiudad());
-        outPaciente.add(this.getEps());
-        outPaciente.add(this.getEnfermedad());
-
-        return outPaciente;
 
     }
 

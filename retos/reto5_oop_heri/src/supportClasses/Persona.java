@@ -8,6 +8,9 @@ public class Persona {
     private int edad;
     private String ciudad;
 
+    public Persona(){        
+    }
+
     public Persona(String nombre, String cc, int edad, String ciudad) {
 
         this.nombre = nombre;
